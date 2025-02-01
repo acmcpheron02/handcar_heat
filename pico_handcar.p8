@@ -13,7 +13,7 @@ function _init()
 	cartlever = "neutral"
 	cartspeed = 0
 	leverpos = 0
-	force = 5
+	force = 4
 	
 	seed_fore = .1249
 	seed_back = .4629
@@ -33,10 +33,10 @@ for x = 1, 128 do
 end
 
 function _update60()
-	if btn(4) and not btn(5) then 
+	if btn(0) and not btn(1) then 
 		pumpleft() 
 		end
-	if btn(5) and not btn(4) then 
+	if btn(1) and not btn(0) then 
 		pumpright() 
 		end
 	if cartspeed > 0 then
@@ -74,23 +74,40 @@ function _draw()
  draw_clouds()
  draw_terrain()
  draw_cart()
-
- draw_ui()
-
+ 
  for i, v in ipairs(decos) do
-  spr(v[1], v[2]-distance*4, v[3])
- end
+	spr(v[1], v[2]-distance*4, v[3])
+end
+
+draw_ui()
 
 end
 
 function draw_ui()
-	
+-- 	rectfill(34,96,36,79,7)
+-- 	rectfill(30, 87+(leverpos*.08),40,89+(leverpos*.08), 4)
+-- 	rectfill(90,96,92,79,7)
+-- 	rectfill(86, 87+(leverpos*-.08),96,89+(leverpos*-.08), 4)
+	rectfill(34,74,91,77,8)
+	rectfill(39,74,86,77,2)
+	rectfill(62+(leverpos*-.3),70,64+(leverpos*-.3),80, 6)
+	rectfill(62+(leverpos*-.3),71,64+(leverpos*-.3),79, 7)
 end
 
 function draw_cart()
 	sspr(0,11,49,21,39,89)
-	sspr(66,11,15,21,49,82,15,21,true)
-	sspr(66,11,15,21,63,82,15,21,false)
+	if leverpos < -33 then
+		sspr(51,11,15,21,49,82,15,21,true)
+		sspr(81,11,15,21,63,82,15,21,false)
+	end
+	if -34 < leverpos and leverpos < 34 then
+		sspr(66,11,15,21,49,82,15,21,true)
+		sspr(66,11,15,21,63,82,15,21,false)
+	end
+	if 33 < leverpos then
+		sspr(81,11,15,21,49,82,15,21,true)
+		sspr(51,11,15,21,63,82,15,21,false)
+	end
 	sspr(0,0,11,11,46,104)
 	sspr(0,0,11,11,70,104)
 end
@@ -101,7 +118,7 @@ function draw_terrain()
 		line(x, flr(foreground[x+1]), x, 127, 4)
 	 end
 	 rectfill(0,115,127,127,3)
-	 rectfill(0,76,128,128,10)
+	 rectfill(0,70,128,128,10)
 	 rectfill(0,114,128,128,9)
 	 rectfill(0,112,128,116,6)
 end
@@ -137,11 +154,11 @@ end
 
 function topography_fore(x)
 	local pos=x/127
-	return 60+flr(sinw(pos+100*seed_fore,0.75,3))
+	return 58+flr(sinw(pos+100*seed_fore,0.75,3))
 			 +flr(sinw(pos+100*seed_fore,6,0.75))
 end
 
-function pumpleft()
+function pumpright()
 	if leverpos > -100 then
 		leverpos -= force
 		cartspeed += force
@@ -153,7 +170,7 @@ function pumpleft()
 	rightspr = 32
 end
 
-function pumpright()
+function pumpleft()
 	if leverpos < 100 then
 		leverpos += force
 		cartspeed += force
