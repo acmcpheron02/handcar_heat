@@ -67,20 +67,15 @@ end
 
 function _draw()
  cls(12)
- print(cartlever)
- print(cartspeed)
- print(distance)
-
- for x = 0, 127 do
-	line(x, flr(background[x+1]), x, 127, 2)
-	line(x, flr(foreground[x+1]), x, 127, 4)
- end
- rectfill(0, 115, 127, 127, 3)
- rectfill(0,72,128,128,10)
- rectfill(0,104,128,108,6)
- rectfill(0,108,128,128,9)
-
+ --print(cartlever)
+ --print(cartspeed)
+ --print(distance)
+ 
+ draw_clouds()
+ draw_terrain()
  draw_cart()
+
+ draw_ui()
 
  for i, v in ipairs(decos) do
   spr(v[1], v[2]-distance*4, v[3])
@@ -88,12 +83,44 @@ function _draw()
 
 end
 
+function draw_ui()
+	
+end
+
 function draw_cart()
-	sspr(0,11,49,21,30,81)
-	sspr(66,11,15,21,40,74,15,21,true)
-	sspr(66,11,15,21,54,74,15,21,false)
-	sspr(0,0,11,11,37,96)
-	sspr(0,0,11,11,61,96)
+	sspr(0,11,49,21,39,89)
+	sspr(66,11,15,21,49,82,15,21,true)
+	sspr(66,11,15,21,63,82,15,21,false)
+	sspr(0,0,11,11,46,104)
+	sspr(0,0,11,11,70,104)
+end
+
+function draw_terrain()
+	for x = 0, 127 do
+		line(x, flr(background[x+1]), x, 127, 2)
+		line(x, flr(foreground[x+1]), x, 127, 4)
+	 end
+	 rectfill(0,115,127,127,3)
+	 rectfill(0,76,128,128,10)
+	 rectfill(0,114,128,128,9)
+	 rectfill(0,112,128,116,6)
+end
+
+function draw_clouds()
+	circfill(0,0,8,7)
+	circfill(10,10,8,7)
+	circfill(20,15,8,7)
+	circfill(40,20,8,7)
+	circfill(50,10,8,7)
+	circfill(20,40,8,7)
+	circfill(25,35,8,7)
+	circfill(70,20,8,7)
+	circfill(75,35,8,7)
+	circfill(90,30,8,7)
+	circfill(95,25,8,7)
+	circfill(110,35,8,7)
+	circfill(115,40,8,7)
+	circfill(127,0,14,15)
 end
 
 function sinw(pos,period,amp)
@@ -103,14 +130,14 @@ end
 
 function topography_back(x)
     local pos=x/127
-    return 30+flr(sinw(pos+100*seed_back,5,3))
+    return 40+flr(sinw(pos+100*seed_back,5.5,3))
 	+flr(sinw(pos+100*seed_back,2,4))
 	+flr(sinw(pos+100*seed_back,1,2))
 end
 
 function topography_fore(x)
 	local pos=x/127
-	return 50+flr(sinw(pos+100*seed_fore,0.75,3))
+	return 60+flr(sinw(pos+100*seed_fore,0.75,3))
 			 +flr(sinw(pos+100*seed_fore,6,0.75))
 end
 
@@ -171,7 +198,7 @@ __gfx__
 0000000000000000000000002000000000000000000000000000000000000fff000000000000fff0000000000444440000000000000000000000000000000000
 00000000000000000000000020000000000000000000000000000044fcc00ff1000000000000ff100000000040fff00000025000000000000006556000000000
 00000000000000000000000222000000000000000000000000000044fccc811100000000000811100000000000fff00000025500000000000065555500f00000
-00000000000000000000000222000000000000000000000000000700000cccc1000000000081cc100000000000fff10005525550000000000655555600ff0f00
+0000000000000000000000022200000000000000000000000000070000ccccc1000000000081cc100000000000fff10005525550000000000655555600ff0f00
 000000000000044000000022722000000000000000000000000070000000ccc10000044fcccccc100000000000811100055255550000000006555655000f0ff0
 00000000000004400000002070200000000000000000000000070000000011110077744fccccc1100700000000cc110005525550000000000556555d00ffff00
 00000000000000770000022070220000000000000000000000000000000111110000000000111110007000000ccc11000002550000000000055555dd0000f000
