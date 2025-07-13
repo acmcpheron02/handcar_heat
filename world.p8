@@ -50,6 +50,6 @@ end
 
 function deco_fill()
 	if #decos < 9 then
-		add(decos, { rnd(dec), distance * 4 + 128, 65 + rnd(60) })
+		add(decos, { rnd(decos), distance * 4 + 128, 65 + rnd(60) })
 	end
 end
