@@ -2,7 +2,6 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
-
 function init_topo()
   decos = {}
   foreground = {}
@@ -46,7 +45,6 @@ function topography_fore(x)
   return 78 + flr(sinw(pos + 100 * seed_fore, 0.75, 3))
       + flr(sinw(pos + 100 * seed_fore, 6, 0.75))
 end
-
 
 function deco_fill()
 	if #decos < 9 then

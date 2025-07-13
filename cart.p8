@@ -49,10 +49,8 @@ function draw_wheels(origin_x, origin_y)
 	end
 end
 
-
 function pump_minigame()
 	if btnp(4) then
-		--leverpos = 99 * pump_direction
 		pump_direction *= -1
 	end
 	if btnp(4) and abs(leverpos) > 85 then
