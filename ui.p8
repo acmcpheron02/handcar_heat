@@ -21,8 +21,10 @@ function draw_ui()
 	print("$", 5, 34, 11)
 	print("0099", 14, 33, 1)
 	print("0099", 15, 34, 9)
-  
+
 	--distance
 	print(flr(distance / 2), 125 - (8 * #tostr(flr(distance / 2))), 33, 1)
 	print(flr(distance / 2), 125 - (8 * #tostr(flr(distance / 2))), 34, 13)
+
+  print(distance%5.5, 8, 8)
 end

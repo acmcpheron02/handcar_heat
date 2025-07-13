@@ -10,10 +10,8 @@ function init_cart()
   pump_direction = 1
   pump_force = 3
   pump_momentum = 1
-  wheelrotate = 0
-  wheelinc = 1
+  wheelinc = 0
 end
-
 
 function draw_cart()
 	sspr(0, 11, 49, 21, 19, 65)
@@ -35,16 +33,38 @@ function draw_cart()
 end
 
 function draw_wheels(origin_x, origin_y)
-	if flr(wheelinc/6) % 4 == 0 then
+
+  --[[
+  Need to derive wheel position from distance
+  sprites align to the follow amount of rotations:
+  1: 0
+  2: 1/16
+  3: 2/16
+  4: 3/16
+
+  If distance is calculated by pixels, then radius is 7.
+  circumf is 22 rounded up. Can use just a fourth of that
+  for 5.5.
+
+  every 1.3744 pixels is 1/16 of a rotation
+
+  does this work?
+  wheel_local_dist += distance
+  if wheel_local_dist > 22 then
+    wheel_local_dist -= 22
+  end
+  --]]
+
+	if wheelinc >= 0 and wheelinc < 1.3744 then
 		sspr(0, 32, 15, 15, origin_x-7, origin_y-7)
 	end
-	if flr(wheelinc/6) % 4 == 1 then
+	if wheelinc >= 1.3744 and wheelinc < 2.7488 then
 		sspr(16, 32, 15, 15, origin_x-7, origin_y-7)
 	end
-	if flr(wheelinc/6) % 4 == 2 then
+	if wheelinc >= 2.7488 and wheelinc < 4.1232 then
 		sspr(32, 32, 15, 15, origin_x-7, origin_y-7)
 	end
-	if flr(wheelinc/6) % 4 == 3 then
+	if wheelinc >= 4.1232 then
 		sspr(48, 32, 15, 15, origin_x-7, origin_y-7)
 	end
 end
@@ -69,8 +89,9 @@ function pump_minigame()
 	end
 end
 
-
 function cart_physics()
+
+  wheelinc = distance % 5.5
   --friction
 	if cartspeed > 0 then
 		cartspeed -= 1
