@@ -23,8 +23,16 @@ function draw_ui()
 	print("0099", 15, 34, 9)
 
 	--distance
-	print(flr(distance / 2), 125 - (8 * #tostr(flr(distance / 2))), 33, 1)
-	print(flr(distance / 2), 125 - (8 * #tostr(flr(distance / 2))), 34, 13)
+	print(flr(distance), 125 - (8 * #tostr(flr(distance))), 33, 1)
+	print(flr(distance), 125 - (8 * #tostr(flr(distance))), 34, 13)
 
   print(distance%5.5, 8, 8)
+
+	--105 p/second
+	--6300 p/m
+	--378000 p/h
+	--126000 f/h
+	--24 mph
+	print(cartspeed/4.4*60, 8, 16)
+	print(cart_energy, 8, 24)
 end

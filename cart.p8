@@ -7,10 +7,14 @@ function init_cart()
   cartspeed = 0
   distance = 0
   leverpos = -100
-  pump_direction = 1
-  pump_force = 3
+  pump_direction = -1
+  pump_pace = 3
   pump_momentum = 1
+	pump_force = 20
   wheelinc = 0
+
+	cartweight_base = 3000
+	cart_energy = 0
 end
 
 function draw_cart()
@@ -30,6 +34,10 @@ function draw_cart()
 	spr(012, 65, 83)
   draw_wheels(31, 86)
 	draw_wheels(55, 86)
+end
+
+function cart_velocity()
+
 end
 
 function draw_wheels(origin_x, origin_y)
@@ -72,14 +80,23 @@ end
 function pump_minigame()
 	if btnp(4) then
 		pump_direction *= -1
+		if abs(leverpos) > 85 then
+			pump_momentum += .2
+			cart_energy += pump_force * 1.5
+			--cartspeed += 2/60 * 1.5
+		end
+		if abs(leverpos) <= 85 then
+			cart_energy += pump_force
+			--cartspeed += 2/60
+		end
 	end
-	if btnp(4) and abs(leverpos) > 85 then
-		pump_momentum += .2
-	end
-	if abs(leverpos) <= 100 then
-		leverpos += pump_direction * pump_force * pump_momentum
-		cartspeed += 2 + 1 * pump_momentum
-	end
+
+	-- if btnp(4) and abs(leverpos) <= 100 then
+	-- 	cartspeed += 2 + 1 * pump_momentum
+	-- end
+
+	leverpos += pump_direction * pump_pace * pump_momentum
+	
 	if abs(leverpos) >= 100 then
 		leverpos = 100 * pump_direction
 		pump_momentum *= .97
@@ -87,16 +104,24 @@ function pump_minigame()
 			pump_momentum = 1
 		end
 	end
+	
 end
 
 function cart_physics()
 
+	cartspeed = sqrt(cart_energy*10/(cartweight_base*.5))
+
+	if btn(2) then
+		cartspeed = 105/60 --pixels/second
+	end
+
+  distance += cartspeed
   wheelinc = distance % 5.5
   --friction
-	if cartspeed > 0 then
-		cartspeed -= 1
-	end
-	if cartspeed > 100 then
-		cartspeed *= .995
-	end
+	-- if cartspeed > 0 then
+	-- 	cartspeed -= 1
+	-- end
+	-- if cartspeed > 100 then
+	-- 	cartspeed *= .995
+	-- end
 end

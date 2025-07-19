@@ -15,13 +15,12 @@ end
 function update_topo()
   for i = 1, 128 do
     del(background, background[1])
-    add(background, topography_back(flr(distance / 10) + i))
+    add(background, topography_back(flr(distance / 20) + i))
   end
   for i = 1, 128 do
     del(foreground, foreground[1])
-    add(foreground, topography_fore(flr(distance) + i))
+    add(foreground, topography_fore(flr(distance / 5) + i))
   end
-  distance += cartspeed / 1000
 end
 
 function draw_topo()
@@ -48,6 +47,6 @@ end
 
 function deco_fill()
 	if #decos < 9 then
-		add(decos, { rnd(decos), distance * 4 + 128, 65 + rnd(60) })
+		add(decos, { rnd(decos), distance + 128, 65 + rnd(60) })
 	end
 end

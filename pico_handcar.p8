@@ -18,10 +18,16 @@ function _update60()
 	cart_physics()
 	update_topo()
 
+
+	--[[
+	person is 18 pixels tall and 6ft
+	that means every 3 pixels == 1 foot
+	5280 feet per mile, so 1760 pixels
+	24 mph is 0.4 miles per minute and 0.00666 miles per second.
+	Convert back to feet, we get 35.2.
+	Convert to pixels, that's 105.6 pixels
+	--]]
 	--speed override
-	if btn(2) then
-		cartspeed = 500
-	end
 end
 
 function _draw()
@@ -29,6 +35,8 @@ function _draw()
 	draw_topo()
 	draw_cart()
 	draw_ui()
+
+	rectfill(128-distance, 60, 134-distance, 64, 2)
 end
 
 __gfx__
