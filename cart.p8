@@ -31,13 +31,9 @@ function draw_cart()
 		sspr(81, 11, 15, 21, 29, 57, 15, 21, true)
 		sspr(51, 11, 15, 21, 43, 57, 15, 21, false)
 	end
-	spr(012, 65, 83)
+	spr(012, 65, 85)
   draw_wheels(31, 86)
 	draw_wheels(55, 86)
-end
-
-function cart_velocity()
-
 end
 
 function draw_wheels(origin_x, origin_y)
@@ -91,10 +87,6 @@ function pump_minigame()
 		end
 	end
 
-	-- if btnp(4) and abs(leverpos) <= 100 then
-	-- 	cartspeed += 2 + 1 * pump_momentum
-	-- end
-
 	leverpos += pump_direction * pump_pace * pump_momentum
 	
 	if abs(leverpos) >= 100 then
@@ -109,19 +101,25 @@ end
 
 function cart_physics()
 
+	--Derive speed from energy + mass so that both pump strength and cart weight can be modified.
 	cartspeed = sqrt(cart_energy*10/(cartweight_base*.5))
 
+	--override for testing to 24 mph
 	if btn(2) then
-		cartspeed = 105/60 --pixels/second
+		cartspeed = 106/60 --pixels/second
+	end
+
+	--override for testing to 24 mph
+	if btn(3) then
+		cartspeed = 50/60
 	end
 
   distance += cartspeed
+
+	if cartspeed > .25 then
+		if rnd(3) < cartspeed then
+			fx_wheel_dust(27,93,1,1)
+		end
+	end
   wheelinc = distance % 5.5
-  --friction
-	-- if cartspeed > 0 then
-	-- 	cartspeed -= 1
-	-- end
-	-- if cartspeed > 100 then
-	-- 	cartspeed *= .995
-	-- end
 end

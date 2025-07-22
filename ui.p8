@@ -34,5 +34,6 @@ function draw_ui()
 	--126000 f/h
 	--24 mph
 	print(cartspeed/4.4*60, 8, 16)
+	print(cartspeed, 78, 16)
 	print(cart_energy, 8, 24)
 end

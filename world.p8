@@ -2,6 +2,8 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
+--topography
+
 function init_topo()
   decos = {}
   foreground = {}
@@ -45,6 +47,49 @@ function topography_fore(x)
       + flr(sinw(pos + 100 * seed_fore, 6, 0.75))
 end
 
+--Rocks
+function init_rocks()
+  rock_sprites = {9, 10, 11}
+  --rock definition = {sprite, xpos, weight}
+  rocks = {{9, 120, 50}}
+  nextrock = 0
+end
+
+function update_rocks()
+  for r in all(rocks) do
+    r[2] -= cartspeed
+  end
+  next_rock()
+  rock_collision()
+end
+
+function next_rock()
+  nextrock += cartspeed
+  if nextrock >= 250 then
+    nextrock = rnd(200)
+    add(rocks, {10, 130, 50})
+  end
+end
+
+function rock_collision()
+  for r in all(rocks) do
+    if r[2] <= 71 then
+      del(rocks, r)
+      fx_explode_pebbles(72,86,1,25)
+      fx_explode_rubble(72,86,2,5)
+    end
+  end
+end
+
+function draw_rocks()
+  for r in all(rocks) do
+    spr(r[1], r[2], 86)
+  end
+
+  pset(71,86,12)
+end
+
+-- World Decorations
 function deco_fill()
 	if #decos < 9 then
 		add(decos, { rnd(decos), distance + 128, 65 + rnd(60) })
