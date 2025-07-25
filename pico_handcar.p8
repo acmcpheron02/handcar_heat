@@ -1,11 +1,12 @@
 pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
-#include settings.p8
 #include cart.p8
-#include world.p8
+#include settings.p8
 #include ui.p8
+#include upgrades.p8
 #include utils.p8
+#include world.p8
 
 function _init()
 	init_settings()
@@ -13,6 +14,7 @@ function _init()
 	init_topo()
 	init_rocks()
 	init_fx()
+	init_upgrades()
 end
 
 function _update60()

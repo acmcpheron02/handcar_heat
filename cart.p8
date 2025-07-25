@@ -104,6 +104,9 @@ function cart_physics()
 	--Derive speed from energy + mass so that both pump strength and cart weight can be modified.
 	cartspeed = sqrt(cart_energy*10/(cartweight_base*.5))
 
+	--friction
+	cartspeed *= .995
+
 	--override for testing to 24 mph
 	if btn(2) then
 		cartspeed = 106/60 --pixels/second

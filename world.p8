@@ -67,7 +67,7 @@ function next_rock()
   nextrock += cartspeed
   if nextrock >= 250 then
     nextrock = rnd(200)
-    add(rocks, {10, 130, 50})
+    add(rocks, {10, 130, 100})
   end
 end
 
@@ -77,6 +77,8 @@ function rock_collision()
       del(rocks, r)
       fx_explode_pebbles(72,86,1,25)
       fx_explode_rubble(72,86,2,5)
+      cart_energy -= r[3]
+      money += 3
     end
   end
 end
