@@ -18,7 +18,7 @@ function init_cart()
 end
 
 function draw_cart()
-	sspr(0, 11, 49, 21, 19, 65)
+	sspr(0, 8, 48, 23, 19, 67)
 	if leverpos < -33 then
 		sspr(51, 11, 15, 21, 29, 57, 15, 21, true)
 		sspr(81, 11, 15, 21, 43, 57, 15, 21, false)
@@ -31,9 +31,9 @@ function draw_cart()
 		sspr(81, 11, 15, 21, 29, 57, 15, 21, true)
 		sspr(51, 11, 15, 21, 43, 57, 15, 21, false)
 	end
-	spr(012, 65, 85)
+	spr(012, 61, 86)
   draw_wheels(31, 86)
-	draw_wheels(55, 86)
+	draw_wheels(53, 86)
 end
 
 function draw_wheels(origin_x, origin_y)
