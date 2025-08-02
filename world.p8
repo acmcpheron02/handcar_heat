@@ -87,8 +87,6 @@ function draw_rocks()
   for r in all(rocks) do
     spr(r[1], r[2], 86)
   end
-
-  pset(71,86,12)
 end
 
 -- World Decorations
