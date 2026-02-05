@@ -5,10 +5,11 @@ __lua__
 --topography
 
 function init_topo()
+  distance = 0
   decos = {}
   foreground = {}
   background = {}
-  for x = 1, 128 do
+  for i = 1, 128 do
     add(background, topography_back(distance))
     add(foreground, topography_fore(distance))
   end
@@ -26,9 +27,9 @@ function update_topo()
 end
 
 function draw_topo()
-  for x = 0, 127 do
-    line(x, flr(background[x + 1]), x, 127, 9)
-    line(x, flr(foreground[x + 1]), x, 127, 10)
+  for i = 0, 127 do
+    line(i, flr(background[i + 1]), i, 127, 9)
+    line(i, flr(foreground[i + 1]), i, 127, 10)
   end
   rectfill(0, 85, 127, 127, 10)
   rectfill(0, 92, 127, 94, 6)

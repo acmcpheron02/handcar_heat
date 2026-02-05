@@ -11,6 +11,7 @@ function init_settings()
   --font end
 
   poke(0x5f5c, 255) --turn off btnp repeating
+  
   seed_back = .4629
   seed_fore = .1249
 end

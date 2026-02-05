@@ -2,7 +2,6 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
-
 function draw_ui()
   --black borders
 	rectfill(0, 0, 128, 42, 0)
